@@ -24,21 +24,21 @@
   // Δημιουργία χάρτη και κέντρο
   var map = L.map('map').setView([38.4, 27.15], 6);
 
-  // Base layer (OSM)
+  // Base layer (OpenStreetMap)
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors'
   }).addTo(map);
 
-  // Radar image URL (προσθέτουμε cache-buster για ανανέωση)
+  // Radar image URL με cache-buster για ανανέωση
   function getRadarUrl() {
     return 'https://mgm.gov.tr/FTPDATA/uzal/radar/izm/izmppi15.jpg?ts=' + new Date().getTime();
   }
 
-  // Συντεταγμένες για overlay (NW, NE, SE, SW) ~ 370km radius
-  var imageBounds = [[35.1, 21.8], [41.7, 32.5]]; // [SouthWest, NorthEast]
+  // Προσαρμοσμένα όρια για να ταιριάζει σωστά πάνω στον χάρτη
+  var imageBounds = [[36.0, 25.5], [41.0, 30.0]]; // SouthWest, NorthEast
 
-  // Προσθήκη image overlay
-  var radar = L.imageOverlay(getRadarUrl(), imageBounds).addTo(map);
+  // Προσθήκη radar overlay με διαφάνεια 60%
+  var radar = L.imageOverlay(getRadarUrl(), imageBounds, {opacity: 0.6}).addTo(map);
 
   // Ανανέωση κάθε 10 λεπτά (600000 ms)
   setInterval(function(){
