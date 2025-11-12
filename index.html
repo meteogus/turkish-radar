@@ -22,7 +22,7 @@
 
 <script>
   // Δημιουργία χάρτη και κέντρο
-  var map = L.map('map').setView([38.31, 27.06], 6);
+  var map = L.map('map').setView([38.3045618, 27.0147935], 6);
 
   // Base layer (OpenStreetMap)
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -35,7 +35,7 @@
   }
 
   // Προσαρμοσμένα όρια για να ταιριάζει σωστά πάνω στον χάρτη
-  var imageBounds = [[34.8244497, 22.6901065], [41.6107779, 33.2601609]]; // SouthWest, NorthEast
+  var imageBounds = [[34.8955796, 22.7766002], [41.5462256, 33.1352536]]; // SouthWest, NorthEast
 
   // Προσθήκη radar overlay με διαφάνεια 60%
   var radar = L.imageOverlay(getRadarUrl(), imageBounds, {opacity: 0.6}).addTo(map);
@@ -49,6 +49,7 @@
 
 </body>
 </html>
+
 
 
 
