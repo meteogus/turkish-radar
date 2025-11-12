@@ -37,8 +37,8 @@
   // Συντεταγμένες για overlay (NW, NE, SE, SW) ~ 370km radius
   var imageBounds = [[35.1, 21.8], [41.7, 32.5]]; // [SouthWest, NorthEast]
 
-  // Προσθήκη image overlay με διαφάνεια 60%
-  var radar = L.imageOverlay(getRadarUrl(), imageBounds, {opacity: 0.6}).addTo(map);
+  // Προσθήκη image overlay
+  var radar = L.imageOverlay(getRadarUrl(), imageBounds).addTo(map);
 
   // Ανανέωση κάθε 10 λεπτά (600000 ms)
   setInterval(function(){
