@@ -5,7 +5,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  
+  <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
   <style>
@@ -18,26 +21,26 @@
 <div id="map"></div>
 
 <script>
-  // Map centered at Izmir area
+  // Δημιουργία χάρτη και κέντρο
   var map = L.map('map').setView([38.4, 27.15], 6);
 
-  // OpenStreetMap base layer
+  // Base layer (OSM)
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors'
   }).addTo(map);
 
-  // Radar image URL with cache-buster
+  // Radar image URL (προσθέτουμε cache-buster για ανανέωση)
   function getRadarUrl() {
     return 'https://mgm.gov.tr/FTPDATA/uzal/radar/izm/izmppi15.jpg?ts=' + new Date().getTime();
   }
 
-  // Original bounds (keeps image proportions as before)
-  var imageBounds = [[35.1, 21.8], [41.7, 32.5]]; // SW, NE
+  // Συντεταγμένες για overlay (NW, NE, SE, SW) ~ 370km radius
+  var imageBounds = [[35.1, 21.8], [41.7, 32.5]]; // [SouthWest, NorthEast]
 
-  // Add radar overlay with transparency
+  // Προσθήκη image overlay με διαφάνεια 60%
   var radar = L.imageOverlay(getRadarUrl(), imageBounds, {opacity: 0.6}).addTo(map);
 
-  // Refresh radar every 10 minutes
+  // Ανανέωση κάθε 10 λεπτά (600000 ms)
   setInterval(function(){
     radar.setUrl(getRadarUrl());
   }, 600000);
