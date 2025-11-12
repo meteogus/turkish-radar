@@ -11,7 +11,7 @@
 
   <style>
     body { margin:0; padding:0; }
-    #map { width: 100%; height: 100vh; } /* Full-screen map */
+    #map { width: 100%; height: 100vh; }
   </style>
 </head>
 <body>
@@ -19,26 +19,26 @@
 <div id="map"></div>
 
 <script>
-  // Create map centered at Izmir area
-  var map = L.map('map').setView([38.4, 27.15], 6);
+  // Create map centered around Greece/Turkey
+  var map = L.map('map').setView([38.5, 27.5], 6);
 
   // Add OpenStreetMap base layer
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors'
   }).addTo(map);
 
-  // Function to get radar image URL with timestamp to avoid caching
+  // Function to get radar image with cache-buster
   function getRadarUrl() {
     return 'https://mgm.gov.tr/FTPDATA/uzal/radar/izm/izmppi15.jpg?ts=' + new Date().getTime();
   }
 
-  // Define image bounds (SouthWest, NorthEast) to cover Greece + Turkey
-  var imageBounds = [[35.1, 21.8], [41.7, 32.5]];
+  // Adjusted image bounds (SW, NE) for Greece + West Turkey
+  var imageBounds = [[36.0, 25.5], [41.0, 30.5]];
 
-  // Add radar overlay with transparency (opacity 0.6)
+  // Add radar overlay with semi-transparency
   var radar = L.imageOverlay(getRadarUrl(), imageBounds, {opacity: 0.6}).addTo(map);
 
-  // Refresh radar overlay every 10 minutes (600,000 ms)
+  // Refresh radar every 10 minutes (600,000 ms)
   setInterval(function(){
     radar.setUrl(getRadarUrl());
   }, 600000);
